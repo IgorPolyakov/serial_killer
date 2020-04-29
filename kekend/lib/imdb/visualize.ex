@@ -1,8 +1,14 @@
 defmodule Imdb.Visualize do
   def data(query) do
-    {:ok, pid} = Postgrex.start_link(hostname: "localhost", username: "postgres", password: "postgres", database: "imdb")
-    Postgrex.query!(pid, "SELECT e.id, e.season_number, e.episode_number, r.rating, r.num_votes FROM episodes AS e INNER JOIN ratings AS r ON e.id = r.id WHERE e.show_id = '#{query}' ORDER BY r.rating DESC;" , [])
-    |> Imdb.Hinter.result_to_maps
+    {:ok, pid} = Postgrex.start_link(
+      hostname: Application.fetch_env!(:imdb, :hostname),
+      username: Application.fetch_env!(:imdb, :username),
+      password: Application.fetch_env!(:imdb, :password),
+      database: Application.fetch_env!(:imdb, :database)
+    )
+    data = Postgrex.query!(pid, "SELECT e.id, e.season_number, e.episode_number, r.rating, r.num_votes FROM episodes AS e INNER JOIN ratings AS r ON e.id = r.id WHERE e.show_id = '#{query}' ORDER BY r.rating DESC;" , [])
+    GenServer.stop(pid) # https://stackoverflow.com/questions/44702375/how-to-disconnect-postgrex-connection
+    Imdb.Hinter.result_to_maps(data)
   end
 
   def result_to_maps(%Postgrex.Result{columns: _, rows: nil}), do: []

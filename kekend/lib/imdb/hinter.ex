@@ -1,9 +1,15 @@
 defmodule Imdb.Hinter do
   def data(query) do
-    {:ok, pid} = Postgrex.start_link(hostname: "localhost", username: "postgres", password: "postgres", database: "imdb")
+    {:ok, pid} = Postgrex.start_link(
+      hostname: Application.fetch_env!(:imdb, :hostname),
+      username: Application.fetch_env!(:imdb, :username),
+      password: Application.fetch_env!(:imdb, :password),
+      database: Application.fetch_env!(:imdb, :database)
+    )
     # Postgrex.query!(pid, "select title, ts_rank(to_tsvector(title), plainto_tsquery('#{query}')) from shows where to_tsvector(title) @@ plainto_tsquery('#{query}') order by ts_rank(to_tsvector(title), plainto_tsquery('#{query}')) DESC LIMIT 10;" , [])
-    Postgrex.query!(pid, "SELECT title, id FROM shows WHERE LOWER(title) LIKE LOWER('#{query}%%') LIMIT 10;", [])
-    |> Imdb.Hinter.result_to_maps
+    data = Postgrex.query!(pid, "SELECT title, id FROM shows WHERE LOWER(title) LIKE LOWER('#{query}%%') LIMIT 10;", [])
+    GenServer.stop(pid)
+    Imdb.Hinter.result_to_maps(data)
   end
 
   def result_to_maps(%Postgrex.Result{columns: _, rows: nil}), do: []
