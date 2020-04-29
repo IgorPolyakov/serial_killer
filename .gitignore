@@ -1,0 +1,25 @@
+# The directory Mix will write compiled artifacts to.
+kekend/_build/
+
+# If you run "mix test --cover", coverage assets end up here.
+kekend/cover/
+
+# The directory Mix downloads your dependencies sources to.
+kekend/deps/
+
+# Where third-party dependencies like ExDoc output generated docs.
+kekend/doc/
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+kekend/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+kekend/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+kekend/*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+kekend/imdb-*.tar
+
+kekend/.elixir_ls
