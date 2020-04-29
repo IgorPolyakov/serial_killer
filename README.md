@@ -8,6 +8,12 @@ Idea based on this pic)
 
 ## Back-end
 
+### Routes AKA example
+
+`http://localhost:4000/visualize?show_id=tt7767422` rating each episode
+
+`http://localhost:4000/hinter?query=SuperNatural` hiter for search tv show
+
 ### Prepare
 
 Make sure that you have elixir on your laptop.)

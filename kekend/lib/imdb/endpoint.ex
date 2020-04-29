@@ -33,7 +33,7 @@ defmodule Imdb.Endpoint do
     end
   end
 
-  forward("/hinter/:query", to: Router)
+  forward("/", to: Router)
 
   match _ do
     conn
