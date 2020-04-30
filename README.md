@@ -29,16 +29,25 @@ http://localhost:4000/hinter?query=SuperNatural
 Make sure that you have Docker and Elixir on your machine.
 
 Then setup environment:
-```
+```sh
 ./setup-development-environment.sh
 ```
 
 Get dependencies
 ```sh
-$ mix do deps.get, deps.compile, compile
+cd kekend
+mix do deps.get, deps.compile, compile
 ```
 
 ### Run
+
+With interactive shell:
+```sh
+iex -S mix
+```
+
+Without:
+
 ```sh
 mix run --no-halt
 ```
