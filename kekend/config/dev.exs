@@ -3,5 +3,5 @@ use Mix.Config
 config :serial_killer,
   database: "serial_killer",
   username: "postgres",
-  password: "123",
+  password: "postgres",
   hostname: "localhost"
