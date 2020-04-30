@@ -1,6 +1,10 @@
-# IMDB visualize TV Show rating
+# Serial Killer
 
-Small simple web app based on modern front-end, elixir API and IMDB dataset.
+Visualize ratings of your favourite TV series!
+
+## About
+
+Small simple web app based on modern front-end, Elixir API and IMDB dataset.
 
 Idea based on this pic)
 
@@ -10,13 +14,19 @@ Idea based on this pic)
 
 ### Routes AKA example
 
-`http://localhost:4000/visualize?show_id=tt7767422` rating each episode
+Get ratings for each episode:
+```
+http://localhost:4000/visualize?show_id=tt7767422
+```
 
-`http://localhost:4000/hinter?query=SuperNatural` hiter for search tv show
+Find TV series by typing first letters:
+```
+http://localhost:4000/hinter?query=SuperNatural
+```
 
 ### Prepare
 
-Make sure that you have elixir on your laptop.)
+Make sure that you have Elixir on your machine.
 
 Get dependencies
 ```sh
