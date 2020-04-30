@@ -1,9 +1,9 @@
-defmodule Imdb.MixProject do
+defmodule SerialKiller.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :imdb,
+      app: :serial_killer,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Imdb.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Imdb.Application, []}
+      mod: {SerialKiller.Application, []}
     ]
   end
 
