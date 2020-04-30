@@ -26,7 +26,13 @@ http://localhost:4000/hinter?query=SuperNatural
 
 ### Prepare
 
-Make sure that you have Elixir on your machine.
+Make sure that you have Docker and Elixir on your machine.
+
+
+Then setup environment:
+```
+./setup-development-environment.hs
+```
 
 Get dependencies
 ```sh
@@ -47,4 +53,4 @@ Instruction is [here](https://gist.github.com/evbogdanov/9b0b11e73458e7e8d646cf7
 coming soon
 
 ## License
-[MIT](https://github.com/IgorPolyakov/imdb/blob/master/LICENSE)
+[MIT](https://github.com/IgorPolyakov/serial_killer/blob/master/LICENSE)
