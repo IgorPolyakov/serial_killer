@@ -26,25 +26,35 @@ http://localhost:4000/hinter?query=SuperNatural
 
 ### Prepare
 
-Make sure that you have Elixir on your machine.
+Make sure that you have Docker and Elixir on your machine.
+
+Then setup environment:
+```sh
+./setup-development-environment.sh
+```
 
 Get dependencies
 ```sh
-$ mix do deps.get, deps.compile, compile
+cd kekend
+mix do deps.get, deps.compile, compile
 ```
 
 ### Run
+
+With interactive shell:
+```sh
+iex -S mix
+```
+
+Without:
+
 ```sh
 mix run --no-halt
 ```
-
-### Get last IMDB dataset
-
-Instruction is [here](https://gist.github.com/evbogdanov/9b0b11e73458e7e8d646cf7598840f1e)
 
 ## Front-end
 
 coming soon
 
 ## License
-[MIT](https://github.com/IgorPolyakov/imdb/blob/master/LICENSE)
+[MIT](https://github.com/IgorPolyakov/serial_killer/blob/master/LICENSE)
