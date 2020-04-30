@@ -44,10 +44,6 @@ $ mix do deps.get, deps.compile, compile
 mix run --no-halt
 ```
 
-### Get last IMDB dataset
-
-Instruction is [here](https://gist.github.com/evbogdanov/9b0b11e73458e7e8d646cf7598840f1e)
-
 ## Front-end
 
 coming soon
