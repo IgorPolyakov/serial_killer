@@ -23,6 +23,7 @@ defmodule SerialKiller.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
+      {:db_connection, "~> 2.2"},
       {:plug, "~> 1.7"},
       {:cowboy, "~> 2.5"},
       {:credo, "~> 0.10"},
