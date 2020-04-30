@@ -1,0 +1,2 @@
+defmodule SerialKiller do
+end

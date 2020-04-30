@@ -1,9 +1,9 @@
-defmodule Imdb.Endpoint do
+defmodule SerialKiller.Endpoint do
   use Plug.Router
   use Plug.Debugger
   use Plug.ErrorHandler
 
-  alias Imdb.Router
+  alias SerialKiller.Router
   alias Plug.{Cowboy, HTML}
 
   require Logger
@@ -48,8 +48,8 @@ defmodule Imdb.Endpoint do
     |> Kernel.<>(~S(">redirected</a>.</body></html>))
   end
 
-  defp config, do: Application.fetch_env(:imdb, __MODULE__)
-  defp redirect_url, do: Application.get_env(:imdb, :redirect_url)
+  defp config, do: Application.fetch_env(:serial_killer, __MODULE__)
+  defp redirect_url, do: Application.get_env(:serial_killer, :redirect_url)
 
   def handle_errors(%{status: status} = conn, %{kind: _kind, reason: _reason, stack: _stack}),
     do: send_resp(conn, status, "Something went wrong")

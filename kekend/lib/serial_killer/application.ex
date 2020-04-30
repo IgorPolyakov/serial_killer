@@ -1,4 +1,4 @@
-defmodule Imdb.Application do
+defmodule SerialKiller.Application do
   use Application
 
   def start(_type, _args),
@@ -6,14 +6,14 @@ defmodule Imdb.Application do
 
   defp children do
     [
-      Imdb.Endpoint
+      SerialKiller.Endpoint
     ]
   end
 
   defp opts do
     [
       strategy: :one_for_one,
-      name: Imdb.Supervisor
+      name: SerialKiller.Supervisor
     ]
   end
 end

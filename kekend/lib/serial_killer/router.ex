@@ -1,4 +1,4 @@
-defmodule Imdb.Router do
+defmodule SerialKiller.Router do
   use Plug.Router
 
   plug(:match)
@@ -24,13 +24,13 @@ defmodule Imdb.Router do
 
   defp hinter(query) do
     Jason.encode!(
-      Imdb.Hinter.data(query)
+      SerialKiller.Hinter.data(query)
     )
   end
 
   defp visualize(id) do
     Jason.encode!(
-      Imdb.Visualize.data(id)
+      SerialKiller.Visualize.data(id)
     )
   end
 end

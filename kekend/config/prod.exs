@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :imdb, Imdb.Endpoint,
+config :serial_killer, SerialKiller.Endpoint,
   port: String.to_integer(System.get_env("PORT") || "4444")
 
-config :imdb, redirect_url: System.get_env("REDIRECT_URL")
+config :serial_killer, redirect_url: System.get_env("REDIRECT_URL")

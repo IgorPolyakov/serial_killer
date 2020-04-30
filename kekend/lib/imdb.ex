@@ -1,2 +1,0 @@
-defmodule Imdb do
-end
