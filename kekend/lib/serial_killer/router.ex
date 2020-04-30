@@ -4,33 +4,29 @@ defmodule SerialKiller.Router do
   plug(:match)
   plug(:dispatch)
 
-  @content_type "application/json"
-
   get "hinter" do
-    conn
-    |> put_resp_content_type(@content_type)
-    |> send_resp(200, hinter(conn.params["query"]))
+    query = conn.params["query"]
+    result = SerialKiller.Hinter.data(query)
+
+    send_json(conn, result)
   end
 
   get "visualize" do
-    conn
-    |> put_resp_content_type(@content_type)
-    |> send_resp(200, visualize(conn.params["show_id"]))
+    show_id = conn.params["show_id"]
+    result = SerialKiller.Visualize.data(show_id)
+
+    send_json(conn, result)
   end
 
   match _ do
     send_resp(conn, 404, "Requested page not found!")
   end
 
-  defp hinter(query) do
-    Jason.encode!(
-      SerialKiller.Hinter.data(query)
-    )
-  end
-
-  defp visualize(id) do
-    Jason.encode!(
-      SerialKiller.Visualize.data(id)
-    )
+  defp send_json(conn, map) do
+    conn
+    |> put_resp_content_type("application/json")
+    |> put_resp_header("access-control-allow-origin", "*")
+    |> put_resp_header("access-control-allow-methods", "OPTIONS, GET")
+    |> send_resp(200, Jason.encode!(map))
   end
 end
