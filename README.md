@@ -31,7 +31,7 @@ Make sure that you have Docker and Elixir on your machine.
 
 Then setup environment:
 ```
-./setup-development-environment.hs
+./setup-development-environment.sh
 ```
 
 Get dependencies
