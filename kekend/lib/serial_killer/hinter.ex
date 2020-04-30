@@ -7,7 +7,7 @@ defmodule SerialKiller.Hinter do
       database: Application.fetch_env!(:serial_killer, :database)
     )
     # Postgrex.query!(pid, "select title, ts_rank(to_tsvector(title), plainto_tsquery('#{query}')) from shows where to_tsvector(title) @@ plainto_tsquery('#{query}') order by ts_rank(to_tsvector(title), plainto_tsquery('#{query}')) DESC LIMIT 10;" , [])
-    data = Postgrex.query!(pid, "SELECT title, id FROM shows WHERE LOWER(title) LIKE LOWER('#{query}%%') LIMIT 10;", [])
+    data = Postgrex.query!(pid, "SELECT title, id, start_year FROM shows WHERE LOWER(title) LIKE LOWER('#{query}%%') LIMIT 10;", [])
     GenServer.stop(pid)
     SerialKiller.Hinter.result_to_maps(data)
   end
