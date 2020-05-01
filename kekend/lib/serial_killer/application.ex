@@ -6,7 +6,7 @@ defmodule SerialKiller.Application do
 
   defp children do
     [
-      {Postgrex, Keyword.put(Application.get_env(:serial_killer, :db), :name, DB)},
+      {Postgrex, Keyword.put(Application.get_env(:serial_killer, :db), :name, SerialKiller.DB)},
       SerialKiller.Endpoint
     ]
   end

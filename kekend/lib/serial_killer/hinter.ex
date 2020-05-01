@@ -1,12 +1,11 @@
 defmodule SerialKiller.Hinter do
-  def data(query) do
+  def get_hints(hint) do
     Postgrex.query!(
-      DB,
-      "SELECT title, id, start_year FROM shows WHERE LOWER(title) LIKE LOWER('#{query}%%') LIMIT 10;",
-      [],
-      [pool: DBConnection.ConnectionPool]
+      SerialKiller.DB,
+      "SELECT title, id, start_year FROM shows WHERE title ILIKE '%' || $1 || '%' LIMIT 10",
+      [hint]
     )
-    |> SerialKiller.Hinter.result_to_maps
+    |> result_to_maps
   end
 
   def result_to_maps(%Postgrex.Result{columns: _, rows: nil}), do: []

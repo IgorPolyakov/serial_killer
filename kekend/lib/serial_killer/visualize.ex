@@ -1,12 +1,11 @@
 defmodule SerialKiller.Visualize do
-  def data(query) do
+  def get_ratings(show_id) do
     Postgrex.query!(
-      DB,
-      "SELECT e.id, e.season_number, e.episode_number, r.rating, r.num_votes FROM episodes AS e INNER JOIN ratings AS r ON e.id = r.id WHERE e.show_id = '#{query}' ORDER BY r.rating DESC;",
-      [],
-      [pool: DBConnection.ConnectionPool]
+      SerialKiller.DB,
+      "SELECT e.id, e.season_number, e.episode_number, r.rating, r.num_votes FROM episodes AS e INNER JOIN ratings AS r ON e.id = r.id WHERE e.show_id = $1 ORDER BY r.rating DESC",
+      [show_id]
     )
-    |> SerialKiller.Visualize.result_to_maps
+    |> result_to_maps
   end
 
   def result_to_maps(%Postgrex.Result{columns: _, rows: nil}), do: []
