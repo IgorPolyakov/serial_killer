@@ -13,9 +13,9 @@ defmodule SerialKiller.Router do
 
   get "visualizer" do
     show_id = conn.params["show_id"]
-    ratings = SerialKiller.Visualizer.get_ratings(show_id)
+    show_with_episodes = SerialKiller.Visualizer.get_show_with_episodes(show_id)
 
-    send_json(conn, ratings)
+    send_json(conn, show_with_episodes)
   end
 
   match _ do
