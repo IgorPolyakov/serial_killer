@@ -12,11 +12,11 @@ defmodule SerialKiller.Visualize do
 
   # FIXME: move it to helpers?
   def result_to_maps(%Postgrex.Result{columns: col_nms, rows: rows}) do
-    Enum.map(rows, fn(row) -> row_to_map(col_nms, row) end)
+    Enum.map(rows, fn row -> row_to_map(col_nms, row) end)
   end
 
   defp row_to_map(col_nms, vals) do
     Stream.zip(col_nms, vals)
-    |> Enum.into(Map.new(), &(&1))
+    |> Enum.into(Map.new(), & &1)
   end
 end

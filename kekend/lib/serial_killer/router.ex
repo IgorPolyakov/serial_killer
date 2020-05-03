@@ -5,13 +5,13 @@ defmodule SerialKiller.Router do
   plug(:dispatch)
 
   get "hinter" do
-    query = conn.params["query"]
+    query = conn.params["q"]
     hints = SerialKiller.Hinter.get_hints(query)
 
     send_json(conn, hints)
   end
 
-  get "visualize" do
+  get "visualizer" do
     show_id = conn.params["show_id"]
     ratings = SerialKiller.Visualize.get_ratings(show_id)
 

@@ -16,12 +16,12 @@ Idea based on this pic)
 
 Get ratings for each episode:
 ```
-http://localhost:4000/visualize?show_id=tt7767422
+http://localhost:4000/visualizer?show_id=tt7767422
 ```
 
 Find TV series by typing first letters:
 ```
-http://localhost:4000/hinter?query=SuperNatural
+http://localhost:4000/hinter?q=SuperNatural
 ```
 
 ### Prepare
