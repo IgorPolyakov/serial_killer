@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Serial Killer</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-
         var _table_ = document.createElement('table'),
             _tr_ = document.createElement('tr'),
             _th_ = document.createElement('th'),
@@ -56,7 +54,7 @@
             $("#tags").autocomplete({
                 minLength: 1,
                 source: function (request, response) {
-                    $.getJSON("http://localhost:4000/hinter?query=" + request.term, function (data) {
+                    $.getJSON("http://localhost:4000/hinter?q=" + request.term, function (data) {
                         response($.map(data, function(item){
                             return{
                                 label: item.title + " - " + item.start_year,
@@ -67,7 +65,7 @@
                 }
             });
             $("#kill").click(function () {
-                $.getJSON("http://localhost:4000/visualize?show_id=" + $("#tags").val(), function (data) {
+                $.getJSON("http://localhost:4000/visualizer?show_id=" + $("#tags").val(), function (data) {
                     console.log(data);
                     episode_number = Math.max.apply(Math, data.map(function (o) { return o.episode_number; }))
                     season_number = Math.max.apply(Math, data.map(function (o) { return o.season_number; }))
