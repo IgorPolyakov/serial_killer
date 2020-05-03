@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Serial Killer</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+        var _table_ = document.createElement('table'),
+            _tr_ = document.createElement('tr'),
+            _th_ = document.createElement('th'),
+            _td_ = document.createElement('td');
+
+        // Builds the HTML Table out of myList json data from Ivy restful service.
+        function buildHtmlTable(arr) {
+            var table = _table_.cloneNode(false),
+                columns = addAllColumnHeaders(arr, table);
+            for (var i = 0, maxi = arr.length; i < maxi; ++i) {
+                var tr = _tr_.cloneNode(false);
+                for (var j = 0, maxj = columns.length; j < maxj; ++j) {
+                    var td = _td_.cloneNode(false);
+                    cellValue = arr[i][columns[j]];
+                    td.appendChild(document.createTextNode(arr[i][columns[j]] || ''));
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            return table;
+        }
+
+        // Adds a header row to the table and returns the set of columns.
+        // Need to do union of keys from all records as some records may not contain
+        // all records
+        function addAllColumnHeaders(arr, table) {
+            var columnSet = [],
+                tr = _tr_.cloneNode(false);
+            for (var i = 0, l = arr.length; i < l; i++) {
+                for (var key in arr[i]) {
+                    if (arr[i].hasOwnProperty(key) && columnSet.indexOf(key) === -1) {
+                        columnSet.push(key);
+                        var th = _th_.cloneNode(false);
+                        th.appendChild(document.createTextNode(key));
+                        tr.appendChild(th);
+                    }
+                }
+            }
+            table.appendChild(tr);
+            return columnSet;
+        }
+        $(function () {
+            $("#tags").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.getJSON("http://localhost:4000/hinter?query=" + request.term, function (data) {
+                        response($.map(data, function(item){
+                            return{
+                                label: item.title + " - " + item.start_year,
+                                value: item.id
+                            }
+                        }));
+                    });
+                }
+            });
+            $("#kill").click(function () {
+                $.getJSON("http://localhost:4000/visualize?show_id=" + $("#tags").val(), function (data) {
+                    console.log(data);
+                    episode_number = Math.max.apply(Math, data.map(function (o) { return o.episode_number; }))
+                    season_number = Math.max.apply(Math, data.map(function (o) { return o.season_number; }))
+                    var season = new Array(season_number);
+                    for (var i = 0; i < season_number; i++) {
+                        season[i] = data.map(
+                          function (season) {
+                            if (season.season_number == i) {
+                              return {
+                                  episode: season.episode_number,
+                                  rating: season.rating
+                                };
+                            }
+                          }
+                        ).filter(Boolean).sort((a, b) => (a.episode > b.episode) ? 1 : -1).map(function (episode) {
+                          return episode.rating.toFixed(2)
+                        });
+                    };
+                    $("#list").html(buildHtmlTable(season));
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="ui-widget">
+        <label for="tags">TV Show: </label>
+        <input id="tags">
+        <button id="kill">Kill</button>
+        <div id="list"></div>
+    </div>
+</body>
+
+</html>
