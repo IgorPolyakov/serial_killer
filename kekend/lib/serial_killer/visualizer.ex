@@ -1,4 +1,4 @@
-defmodule SerialKiller.Visualize do
+defmodule SerialKiller.Visualizer do
   def get_ratings(show_id) do
     Postgrex.query!(
       SerialKiller.DB,

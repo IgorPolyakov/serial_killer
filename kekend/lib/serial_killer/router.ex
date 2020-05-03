@@ -13,7 +13,7 @@ defmodule SerialKiller.Router do
 
   get "visualizer" do
     show_id = conn.params["show_id"]
-    ratings = SerialKiller.Visualize.get_ratings(show_id)
+    ratings = SerialKiller.Visualizer.get_ratings(show_id)
 
     send_json(conn, ratings)
   end
