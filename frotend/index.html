@@ -54,7 +54,7 @@
             $("#tags").autocomplete({
                 minLength: 1,
                 source: function (request, response) {
-                    $.getJSON("http://localhost:4000/hinter?q=" + request.term, function (data) {
+                    $.getJSON("http://176.118.165.178:4444/hinter?q=" + request.term, function (data) {
                         response($.map(data, function(item){
                             return{
                                 label: item.title + " - " + item.start_year,
@@ -65,7 +65,7 @@
                 }
             });
             $("#kill").click(function () {
-                $.getJSON("http://localhost:4000/visualizer?show_id=" + $("#tags").val(), function (data) {
+                $.getJSON("http://176.118.165.178:4444/visualizer?show_id=" + $("#tags").val(), function (data) {
                     console.log(data);
                     episode_number = Math.max.apply(Math, data.map(function (o) { return o.episode_number; }))
                     season_number = Math.max.apply(Math, data.map(function (o) { return o.season_number; }))
