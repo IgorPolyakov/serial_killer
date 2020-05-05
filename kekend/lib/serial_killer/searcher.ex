@@ -9,8 +9,8 @@ defmodule SerialKiller.Searcher do
       "SELECT *
        FROM shows
        WHERE title_to_tsvector(title) @@ plainto_tsquery('simple', unaccent($1))
+       ORDER BY num_votes
        LIMIT #{@limit}",
-      # TODO: order by num_votes
       [words]
     )
   end
