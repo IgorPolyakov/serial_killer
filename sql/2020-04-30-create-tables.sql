@@ -1,7 +1,9 @@
 CREATE TABLE shows (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
-  start_year INTEGER NOT NULL
+  start_year INTEGER NOT NULL,
+  rating DECIMAL(3, 1) NOT NULL,
+  num_votes INTEGER NOT NULL
 );
 
 CREATE TABLE episodes (
