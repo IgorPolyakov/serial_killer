@@ -33,7 +33,6 @@ gunzip ./tmp/ratings.tsv.gz
 ### Normalize data
 ################################################################################
 
-# Filter only shows (no porn) and extract their id, title, start_year with episodes
 echo 'Normalizing shows & episodes...'
 ./scripts/normalize-shows-and-episodes.rb
 
