@@ -4,7 +4,7 @@ defmodule SerialKiller.Searcher do
   # TODO: make it configurable via query string
   @limit 100
 
-  def search(words) do
+  def search_shows(words) do
     DB.query!(
       "SELECT *
        FROM shows

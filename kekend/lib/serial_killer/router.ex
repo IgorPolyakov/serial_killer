@@ -24,7 +24,7 @@ defmodule SerialKiller.Router do
 
   get "/searcher" do
     words = conn.params["words"]
-    shows = SerialKiller.Searcher.search(words)
+    shows = SerialKiller.Searcher.search_shows(words)
 
     send_json(conn, shows)
   end
