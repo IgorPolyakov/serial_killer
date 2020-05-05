@@ -19,14 +19,14 @@ Get ratings for each episode:
 http://localhost:4000/visualizer?show_id=tt7767422
 ```
 
-Find **popular** TV series matching a given query:
+Find **popular** TV series by **first letters** in the title:
 ```
-http://localhost:4000/hinter?q=South%20Park
+http://localhost:4000/hinter?letters=Sou%20Par
 ```
 
-Find **all** TV series matching the query:
+Find **all** TV series by **full words** in the title:
 ```
-http://localhost:4000/searcher?q=Realnye%20patsany
+http://localhost:4000/searcher?words=South%20Park
 ```
 
 ### Prepare
