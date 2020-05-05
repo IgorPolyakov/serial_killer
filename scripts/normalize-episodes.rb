@@ -15,10 +15,10 @@ File.readlines(file_with_normalized_shows).each do |line|
   shows[show_id] = true
 end
 
-ratings = File.read(file_with_ratings).split("\n").map do |raw_rating|
-  raw_rating = raw_rating.split(/\t/)
+ratings = File.read(file_with_ratings).split("\n").map do |rating|
+  rating_fields = rating.split(/\t/)
   [
-    raw_rating[0], [raw_rating[1], raw_rating[2]]
+    rating_fields[0], [rating_fields[1], rating_fields[2]]
   ]
 end.to_h
 

@@ -9,7 +9,7 @@ CREATE TABLE episodes (
   show_id TEXT NOT NULL,
   season_number INTEGER NOT NULL,
   episode_number INTEGER NOT NULL,
-  rating DECIMAL NOT NULL,
+  rating DECIMAL(3, 1) NOT NULL,
   num_votes INTEGER NOT NULL,
 
   FOREIGN KEY (show_id) REFERENCES shows (id)
