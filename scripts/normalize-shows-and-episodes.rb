@@ -2,25 +2,32 @@
 # frozen_string_literal: true
 
 tmp_dir = File.join(File.dirname(__FILE__), '../tmp/')
-
+file_with_all_raw_films = File.join(tmp_dir, 'all-films.tsv')
 file_with_normalized_shows = File.join(tmp_dir, 'normalized-shows.tsv')
 file_with_raw_episodes = File.join(tmp_dir, 'episodes.tsv')
 file_with_normalized_episodes = File.join(tmp_dir, 'normalized-episodes.tsv')
 file_with_ratings = File.join(tmp_dir, 'ratings.tsv')
 
+ratings = File.read(file_with_ratings).split("\n").map do |line|
+  id, rating, num_votes = line.split(/\t/)
+  [id, [rating, num_votes]]
+end.to_h
+
 shows = {}
 
-File.readlines(file_with_normalized_shows).each do |line|
-  show_id = line.split(/\t/)[0]
-  shows[show_id] = true
-end
+File.open(file_with_normalized_shows, 'w+') do |file|
+  File.readlines(file_with_all_raw_films).each do |line|
+    id, title_type, primary_title, _original_title, is_adult, start_year, _end_year, _runtime_minutes, _genres = line.strip.split(/\t/)
+    next unless (title_type == 'tvSeries' || title_type == 'tvMiniSeries') && is_adult == '0'
 
-ratings = File.read(file_with_ratings).split("\n").map do |rating|
-  rating_fields = rating.split(/\t/)
-  [
-    rating_fields[0], [rating_fields[1], rating_fields[2]]
-  ]
-end.to_h
+    shows[id] = true
+    rating, num_votes = ratings[id]
+    start_year = 0 if start_year == '\N'
+    num_votes ||= 0
+    rating ||= 0
+    file.puts("#{id}\t#{primary_title}\t#{start_year}\t#{rating}\t#{num_votes}")
+  end
+end
 
 File.open(file_with_normalized_episodes, 'w+') do |file|
   File.readlines(file_with_raw_episodes).each do |line|
