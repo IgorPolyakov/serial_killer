@@ -5,7 +5,8 @@ defmodule SerialKiller.Visualizer do
     DB.query!(
       "SELECT id, season_number, episode_number, rating, num_votes
        FROM episodes
-       WHERE show_id = $1",
+       WHERE show_id = $1
+       ORDER BY (season_number, episode_number)",
       [show_id]
     )
   end
