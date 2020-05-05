@@ -19,8 +19,8 @@ defmodule SerialKiller.Router do
   end
 
   get "searcher" do
-    query = conn.params["q"]
-    search_results = SerialKiller.Searcher.search(query)
+    search_query = conn.params["q"]
+    search_results = SerialKiller.Searcher.search(search_query)
 
     send_json(conn, search_results)
   end
