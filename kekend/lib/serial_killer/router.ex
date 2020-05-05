@@ -1,24 +1,28 @@
 defmodule SerialKiller.Router do
   use Plug.Router
+  use Plug.Debugger
+  use Plug.ErrorHandler
 
+  plug(Plug.Logger, log: :debug)
   plug(:match)
+  plug(SerialKiller.Plug.QueryParams)
   plug(:dispatch)
 
-  get "hinter" do
+  get "/hinter" do
     letters = conn.params["letters"]
     hints = SerialKiller.Hinter.get_hints(letters)
 
     send_json(conn, hints)
   end
 
-  get "visualizer" do
+  get "/visualizer" do
     show_id = conn.params["show_id"]
     show_with_episodes = SerialKiller.Visualizer.get_show_with_episodes(show_id)
 
     send_json(conn, show_with_episodes)
   end
 
-  get "searcher" do
+  get "/searcher" do
     words = conn.params["words"]
     shows = SerialKiller.Searcher.search(words)
 
