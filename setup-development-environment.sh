@@ -35,7 +35,7 @@ gunzip ./tmp/ratings.tsv.gz
 
 # Filter only shows (no porn) and extract their id, title, start_year
 echo 'Normalizing shows...'
-awk -F'\t' '$2 == "tvSeries" && $5 == 0 { print $1"\t"$3"\t"$6 }' ./tmp/all-films.tsv | sed 's/\\N$/0/' > ./tmp/normalized-shows.tsv
+awk -F'\t' '($2 == "tvSeries" || $2 == "tvMiniSeries") && $5 == 0 { print $1"\t"$3"\t"$6 }' ./tmp/all-films.tsv | sed 's/\\N$/0/' > ./tmp/normalized-shows.tsv
 
 echo 'Normalizing episodes...'
 ./scripts/normalize-episodes.rb
