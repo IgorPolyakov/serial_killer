@@ -54,4 +54,6 @@ cat ./tmp/normalized-episodes.tsv | docker exec -i serial-killer-postgres psql -
 ### Perform additional DB manipulations
 ################################################################################
 
-cat ./sql/2020-05-05-create-show-id-index.sql | docker exec -i serial-killer-postgres psql -U postgres serial_killer
+cat ./sql/2020-05-05-create-show-id-index.sql \
+    ./sql/2020-05-05-create-extension-unaccent.sql \
+| docker exec -i serial-killer-postgres psql -U postgres serial_killer
