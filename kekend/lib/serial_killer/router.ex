@@ -18,6 +18,13 @@ defmodule SerialKiller.Router do
     send_json(conn, show_with_episodes)
   end
 
+  get "searcher" do
+    query = conn.params["q"]
+    search_results = SerialKiller.Searcher.search(query)
+
+    send_json(conn, search_results)
+  end
+
   match _ do
     send_resp(conn, 404, "Requested page not found!")
   end

@@ -19,9 +19,14 @@ Get ratings for each episode:
 http://localhost:4000/visualizer?show_id=tt7767422
 ```
 
-Find TV series by typing first letters:
+Find **popular** TV series matching a given query:
 ```
-http://localhost:4000/hinter?q=SuperNatural
+http://localhost:4000/hinter?q=South%20Park
+```
+
+Find **all** TV series matching the query:
+```
+http://localhost:4000/searcher?q=Realnye%20patsany
 ```
 
 ### Prepare
