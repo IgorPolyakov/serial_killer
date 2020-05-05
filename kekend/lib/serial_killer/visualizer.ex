@@ -27,10 +27,10 @@ defmodule SerialKiller.Visualizer do
 
   defp get_episodes(%{"id" => show_id}) do
     DB.query!(
-      "SELECT e.id, e.season_number, e.episode_number, r.rating, r.num_votes
-       FROM episodes AS e
-       INNER JOIN ratings AS r ON e.id = r.id
-       WHERE e.show_id = $1 ORDER BY r.rating DESC",
+      "SELECT id, season_number, episode_number, rating, num_votes
+       FROM episodes
+       WHERE show_id = $1
+       ORDER BY (season_number, episode_number)",
       [show_id]
     )
   end

@@ -48,4 +48,3 @@ echo 'Normalizing episodes...'
 echo 'Inserting into Postgres...'
 cat ./tmp/normalized-shows.tsv | docker exec -i serial-killer-postgres psql -U postgres serial_killer -c "COPY shows FROM STDIN DELIMITER E'\t'"
 cat ./tmp/normalized-episodes.tsv | docker exec -i serial-killer-postgres psql -U postgres serial_killer -c "COPY episodes FROM STDIN DELIMITER E'\t'"
-cat ./tmp/ratings.tsv | docker exec -i serial-killer-postgres psql -U postgres serial_killer -c "COPY ratings FROM STDIN DELIMITER E'\t' CSV HEADER"
