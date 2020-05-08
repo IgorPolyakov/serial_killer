@@ -9,8 +9,8 @@ defmodule SerialKiller.Router do
   plug(:dispatch)
 
   get "/hinter" do
-    query = conn.params["q"]
-    hints = SerialKiller.Hinter.get_hints(query)
+    letters = conn.params["letters"]
+    hints = SerialKiller.Hinter.get_hints(letters)
 
     send_json(conn, hints)
   end
@@ -20,6 +20,13 @@ defmodule SerialKiller.Router do
     show_with_episodes = SerialKiller.Visualizer.get_show_with_episodes(show_id)
 
     send_json(conn, show_with_episodes)
+  end
+
+  get "/searcher" do
+    words = conn.params["words"]
+    shows = SerialKiller.Searcher.search_shows(words)
+
+    send_json(conn, shows)
   end
 
   match _ do
