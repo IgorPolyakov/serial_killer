@@ -59,7 +59,10 @@ mix run --no-halt
 
 ## Front-end
 
-coming soon
+```sh
+cd frontend
+yarn start
+```
 
 ## License
 [MIT](https://github.com/IgorPolyakov/serial_killer/blob/master/LICENSE)
