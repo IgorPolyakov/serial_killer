@@ -7,6 +7,7 @@ defmodule SerialKiller.Best do
   # TODO: think how to calculte best shows
   @min_num_votes_to_consider_show_good 100_000
 
+  # TODO: cache results
   def get_best_shows do
     DB.query!(
       "SELECT *
