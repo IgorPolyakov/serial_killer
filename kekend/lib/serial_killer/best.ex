@@ -11,7 +11,7 @@ defmodule SerialKiller.Best do
     DB.query!(
       "SELECT *
        FROM shows
-       WHERE num_votes > #{@min_num_votes_to_consider_show_good}
+       WHERE num_votes >= #{@min_num_votes_to_consider_show_good}
        ORDER BY rating DESC
        LIMIT #{@limit}",
       []
