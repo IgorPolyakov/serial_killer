@@ -29,6 +29,16 @@ Find **all** TV series by **full words** in the title:
 http://localhost:4000/searcher?words=South%20Park
 ```
 
+Get the most popular shows:
+```
+http://localhost:4000/popular
+```
+
+Get the top rated shows:
+```
+http://localhost:4000/best
+```
+
 ### Prepare
 
 Make sure that you have Docker and Elixir on your machine.
