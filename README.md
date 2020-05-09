@@ -57,11 +57,29 @@ Without:
 mix run --no-halt
 ```
 
-## Front-end
+## Front end
+
+### Build
 
 ```sh
 cd frontend
+yarn
+```
+
+### Start front-end server
+
+```sh
 yarn start
+```
+
+### Code formatting
+
+We use [Prettier](https://prettier.io/) to format our code.
+
+Show the list of unformatted files:
+
+```sh
+yarn run prettier
 ```
 
 ## License
