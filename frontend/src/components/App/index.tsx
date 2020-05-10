@@ -14,7 +14,7 @@ const App = () => (
       <Route exact path="/search">
         <Search />
       </Route>
-      <Route exact path="/show">
+      <Route exact path="/show/:id">
         <Show />
       </Route>
       <Route path="*">

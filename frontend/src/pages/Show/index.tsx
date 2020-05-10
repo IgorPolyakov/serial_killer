@@ -1,5 +1,9 @@
 import * as React from 'react'
+import { useParams } from 'react-router-dom'
 
-const Show = () => <p>Show</p>
+const Show = () => {
+  const { id } = useParams()
+  return <p>Show with id: {id}</p>
+}
 
 export default Show
