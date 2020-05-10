@@ -20,11 +20,11 @@ File.open(file_with_normalized_shows, 'w+') do |file|
     id, title_type, primary_title, _original_title, is_adult, start_year, _end_year, _runtime_minutes, _genres = line.strip.split(/\t/)
     next unless (title_type == 'tvSeries' || title_type == 'tvMiniSeries') && is_adult == '0'
 
-    shows[id] = true
     rating, num_votes = ratings[id]
     start_year = 0 if start_year == '\N'
-    num_votes ||= 0
-    rating ||= 0
+    next unless num_votes
+
+    shows[id] = true
     file.puts("#{id}\t#{primary_title}\t#{start_year}\t#{rating}\t#{num_votes}")
   end
 end
@@ -35,6 +35,7 @@ File.open(file_with_normalized_episodes, 'w+') do |file|
     next unless shows.key?(show_id)
 
     rating, num_votes = ratings[id]
+    next unless num_votes
 
     season_number = 0 if season_number == '\N'
     episode_number = 0 if episode_number == '\N'
