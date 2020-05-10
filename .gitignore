@@ -32,3 +32,4 @@ frontend/.cache/
 frontend/.idea/
 frontend/dist/
 frontend/node_modules/
+frontend/yarn-error.log

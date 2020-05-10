@@ -1,14 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import 'mobx-react-lite/batchingForReactDom'
+import App from '~/components/App'
 
-import Hello from './components/Hello'
-import TestMobx from './components/TestMobx'
-
-ReactDOM.render(
-  <div>
-    <Hello to="Serial Killer" />
-    <TestMobx />
-  </div>,
-  document.getElementById('serial-killer')
-)
+ReactDOM.render(<App />, document.getElementById('serial-killer'))
