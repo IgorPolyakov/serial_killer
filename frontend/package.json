@@ -6,6 +6,7 @@
   "repository": "https://github.com/IgorPolyakov/serial_killer",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.6",
     "react": "^16.13.1",
