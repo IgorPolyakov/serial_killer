@@ -4,7 +4,7 @@ export const searchShows = (words: string) => {
   const encodedWords = encodeURIComponent(words)
 
   console.log(
-    `Going to search: ${config.apiBaseUrl}/search?words=${encodedWords}`
+    `Going to search: ${config.apiBaseUrl}/searcher?words=${encodedWords}`
   )
 }
 
