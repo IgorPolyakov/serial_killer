@@ -6,9 +6,12 @@ const Search = () => {
   const queryParams = useQueryParams()
   const words = queryParams.get('words')
   const message = words ? `Search by words: '${words}'` : 'Nothing to search'
-  if (words) {
+
+  React.useEffect(() => {
+    if (!words) return
+
     searchShows(words)
-  }
+  }, [words]) // Only re-run the effect if words change
 
   return <p>{message}</p>
 }
