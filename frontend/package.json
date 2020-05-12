@@ -1,0 +1,29 @@
+{
+  "name": "serial-killer",
+  "version": "1.0.0",
+  "description": "Front end for serial-killer.org",
+  "main": "index.js",
+  "repository": "https://github.com/IgorPolyakov/serial_killer",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "2.0.5",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "prettier": "prettier --list-different 'src/**/*.{ts,tsx}'"
+  }
+}

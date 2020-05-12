@@ -26,3 +26,10 @@ kekend/*.ez
 kekend/serial_killer-*.tar
 
 kekend/.elixir_ls
+
+# Front end
+frontend/.cache/
+frontend/.idea/
+frontend/dist/
+frontend/node_modules/
+frontend/yarn-error.log
