@@ -29,6 +29,18 @@ defmodule SerialKiller.Router do
     send_json(conn, shows)
   end
 
+  get "/best" do
+    best_shows = SerialKiller.Best.get_best_shows()
+
+    send_json(conn, best_shows)
+  end
+
+  get "/popular" do
+    popular_shows = SerialKiller.Popular.get_popular_shows()
+
+    send_json(conn, popular_shows)
+  end
+
   match _ do
     send_resp(conn, 404, "Requested page not found!")
   end
