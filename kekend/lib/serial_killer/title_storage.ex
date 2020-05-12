@@ -1,6 +1,12 @@
 defmodule SerialKiller.TitleStorage do
-  def init do
-    :ets.new(:title_storage, [:bag, :protected, :named_table])
+  alias :ets, as: Ets
+
+  def start_link(_args) do
+    GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
+  end
+
+  def init(:ok) do
+    Ets.new(:title_storage, [:bag, :protected, :named_table])
 
     shows =
       Postgrex.query!(
@@ -10,6 +16,17 @@ defmodule SerialKiller.TitleStorage do
       ).rows
 
     build_one_letter_index(shows)
+    :ok
+  end
+
+  def get(letter) do
+    Ets.lookup(:title_storage, letter)
+    |> Enum.map(fn row ->
+      {_letter, [title, num, id]} = row
+
+      # TODO выглядит, буд-то бы можно сделать красивше, но я пока не придумал
+      [title, num, id]
+    end)
   end
 
   defp build_one_letter_index(shows) do
@@ -21,7 +38,7 @@ defmodule SerialKiller.TitleStorage do
           |> String.at(0)
           |> String.downcase()
 
-        :ets.insert(:title_storage, {letters, row})
+        Ets.insert(:title_storage, {letters, row})
       end)
     end)
   end
