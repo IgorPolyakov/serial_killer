@@ -8,7 +8,7 @@ import NotFound from '~/pages/NotFound'
 import { GlobalStyle } from './styled'
 
 const App = () => (
-  <>
+  <React.StrictMode>
     <GlobalStyle />
     <Router>
       <Header />
@@ -27,7 +27,7 @@ const App = () => (
         </Route>
       </Switch>
     </Router>
-  </>
+  </React.StrictMode>
 )
 
 export default App
