@@ -1,11 +1,17 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { TShow, TShows } from '~/types'
 
-// TODO: add Show types
-const Shows = ({ shows }) => {
-  const renderShow = ({ id, title }) => (
+interface TProps {
+  shows: TShows
+}
+
+const Shows = ({ shows }: TProps) => {
+  const renderShow = ({ id, title, rating }: TShow) => (
     <li key={id}>
-      <Link to={`/show/${id}`}>{title}</Link>
+      <Link to={`/show/${id}`}>
+        {title} -- {rating}
+      </Link>
     </li>
   )
 
