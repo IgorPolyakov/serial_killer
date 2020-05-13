@@ -2,7 +2,7 @@ import axios from 'axios'
 import config from '~/config'
 import type { TShows, TShowWithEpisodes } from '~/types'
 
-interface TApiCallArgs {
+type TApiCallArgs = {
   url: string
   params?: any
   defaultReturn?: any

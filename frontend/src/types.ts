@@ -1,7 +1,7 @@
 // DECIMAL(3, 1) converted to a string
 type TRating = string
 
-export interface TShow {
+export type TShow = {
   id: string
   title: string
   start_year: number
@@ -11,7 +11,7 @@ export interface TShow {
 
 export type TShows = Array<TShow>
 
-interface TEpisode {
+type TEpisode = {
   id: string
   season_number: number
   episode_number: number
@@ -21,7 +21,7 @@ interface TEpisode {
 
 export type TEpisodes = Array<TEpisode>
 
-export interface TShowWithEpisodes {
+export type TShowWithEpisodes = {
   show: TShow
   episodes: TEpisodes
 }
