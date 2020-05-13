@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { TShow, TShows } from '~/types'
+import type { TShow, TShows } from '~/types'
 
 interface TProps {
   shows: TShows
