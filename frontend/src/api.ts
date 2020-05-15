@@ -1,8 +1,18 @@
-import config from '~/config'
 import axios from 'axios'
+import config from '~/config'
+import type { TShows, TShowWithEpisodes } from '~/types'
 
-// TODO: add types
-const makeApiCall = async ({ url, params = {}, defaultReturn = null }) => {
+type TApiCallArgs = {
+  url: string
+  params?: any
+  defaultReturn?: any
+}
+
+const makeApiCall = async ({
+  url,
+  params = {},
+  defaultReturn = null,
+}: TApiCallArgs) => {
   try {
     const response = await axios.get(url, {
       params,
@@ -15,14 +25,16 @@ const makeApiCall = async ({ url, params = {}, defaultReturn = null }) => {
   }
 }
 
-export const searchShows = async (words: string) =>
+export const searchShows = async (words: string): Promise<TShows> =>
   await makeApiCall({
     url: '/searcher',
     params: { words },
     defaultReturn: [],
   })
 
-export const getShowWithEpisodes = async (showId: string) =>
+export const getShowWithEpisodes = async (
+  showId: string
+): Promise<TShowWithEpisodes> =>
   await makeApiCall({
     url: '/visualizer',
     params: { show_id: showId },

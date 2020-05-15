@@ -1,6 +1,7 @@
 import * as React from 'react'
 import useQueryParams from '~hooks/useQueryParams'
 import { searchShows } from '~/api'
+import type { TShows } from '~/types'
 import Shows from './components/Shows'
 
 const Search = () => {
@@ -8,7 +9,7 @@ const Search = () => {
   const words = queryParams.get('words')
 
   const [isSearching, setIsSearching] = React.useState(false)
-  const [shows, setShows] = React.useState([])
+  const [shows, setShows] = React.useState<TShows>([])
 
   React.useEffect(() => {
     if (!words) return
