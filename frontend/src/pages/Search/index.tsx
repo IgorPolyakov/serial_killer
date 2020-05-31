@@ -1,5 +1,5 @@
 import * as React from 'react'
-import useQueryParams from '~hooks/useQueryParams'
+import useQueryParams from '~/hooks/useQueryParams'
 import { searchShows } from '~/api'
 import type { TShows } from '~/types'
 import Shows from './components/Shows'
