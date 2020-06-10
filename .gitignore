@@ -1,6 +1,8 @@
 # The directory where temporary files will be saved
 tmp/
 
+.idea
+
 # The directory Mix will write compiled artifacts to.
 kekend/_build/
 
@@ -29,7 +31,7 @@ kekend/.elixir_ls
 
 # Front end
 frontend/.cache/
-frontend/.idea/
 frontend/dist/
 frontend/node_modules/
 frontend/yarn-error.log
+frontend/.eslintcache
