@@ -2,14 +2,13 @@ name: Frontend CI
 
 on:
   push:
-    branches: '*'
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  prepare:
+    name: prepare Environment
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -17,14 +16,36 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
       - name: Setup Node 10.x
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
 
+#      - name: Cache node modules
+#        uses: actions/cache@v2
+#        env:
+#          cache-name: cache-node-modules
+#        with:
+#          path: ~/.yarn
+#          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-build-${{ env.cache-name }}-
+#            ${{ runner.os }}-build-
+#            ${{ runner.os }}-
+
       # Runs a single command using the runners shell
-      - name: prepare Environment
-        run: cd frontend && yarn install --frozen-lockfile
-      # Runs a single command using the runners shell
-      - name: run Lint
-        run: cd frontend && yarn lint
+      - run: cd frontend && yarn install --frozen-lockfile
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: node_modules
+
+  lint:
+    name: ✅ Lint
+    needs: [prepare]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd frontend && yarn lint
