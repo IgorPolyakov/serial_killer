@@ -6,9 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  prepare:
-    name: prepare Environment
+  # This workflow contains a single job called "prepare and lint"
+  prepare-and-lint:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -22,35 +23,20 @@ jobs:
         with:
           node-version: '10.x'
 
-#      - name: Cache node modules
-#        uses: actions/cache@v2
-#        env:
-#          cache-name: cache-node-modules
-#        with:
-#          path: ~/.yarn
-#          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn-lock.json') }}
-#          restore-keys: |
-#            ${{ runner.os }}-build-${{ env.cache-name }}-
-#            ${{ runner.os }}-build-
-#            ${{ runner.os }}-
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # Runs a single command using the runners shell
-      - run: cd frontend && yarn install --frozen-lockfile
-
-      - uses: actions/upload-artifact@v1
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          name: nodeModules
-          path: frontend/node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-  lint:
-    name: ✅ Lint
-    needs: prepare
-    runs-on: ubuntu-latest
+      - name: prepare Environment
+        run: cd frontend && yarn install --frozen-lockfile
 
-    steps:
-      - name: Download artifact from job prepare
-        uses: actions/download-artifact@v1
-        with:
-          name: nodeModules
-      - uses: actions/checkout@v2
-      - run: cd frontend && yarn lint
+      - name: run Lint
+        run: cd frontend && yarn lint
