@@ -37,15 +37,20 @@ jobs:
       # Runs a single command using the runners shell
       - run: cd frontend && yarn install --frozen-lockfile
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v1
         with:
-          path: node_modules
+          name: nodeModules
+          path: frontend/node_modules
 
   lint:
     name: ✅ Lint
-    needs: [prepare]
+    needs: prepare
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download artifact from job prepare
+        uses: actions/download-artifact@v1
+        with:
+          name: nodeModules
       - uses: actions/checkout@v2
       - run: cd frontend && yarn lint
