@@ -28,6 +28,7 @@ defmodule SerialKiller.MixProject do
       {:cowboy, "~> 2.5"},
       {:credo, "~> 0.10"},
       {:plug_cowboy, "~> 2.0"},
+      {:distillery, "~> 2.1"},
       {:postgrex, "~> 0.15"}
     ]
   end
